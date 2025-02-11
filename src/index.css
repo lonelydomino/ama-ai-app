@@ -4,4 +4,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@theme {
+  --font-display: "Satoshi", "sans-serif";
+  --color-earthGreen: #4E7C32;
+  --color-earthyBrown: #5A3C36;
+}
 
+/* In your tailwind.css or global stylesheet */
+.bg-pattern {
+  background-image: url('assets/bg1.png');
+  background-repeat: repeat;
+  background-size: contain;
+}

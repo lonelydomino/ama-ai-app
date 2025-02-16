@@ -1,6 +1,25 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const [username, setUsername] = useState<string | null>(null);
+
+  useEffect(() => {
+    const user = localStorage.getItem('user');
+    if (user) {
+      const userData = JSON.parse(user);
+      setUsername(userData.username);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('apiToken');
+    localStorage.removeItem('user');
+    setUsername(null);
+    navigate('/login');
+  };
+
   return (
     <header className="bg-gradient-to-r from-earthyBrown to-ochreYellow shadow-lg">
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -13,8 +32,8 @@ const Header = () => {
         <nav>
           <ul className="flex space-x-6">
             <li>
-              <Link to="/" className="text-white text-lg hover:underline">
-                Home
+              <Link to="/dashboard" className="text-white text-lg hover:underline">
+                Dashboard
               </Link>
             </li>
             <li>
@@ -28,9 +47,24 @@ const Header = () => {
               </Link>
             </li>
             <li>
-              <Link to="/login" className="bg-white text-earthyBrown px-4 py-2 rounded-lg hover:bg-gray-200">
-                Login
-              </Link>
+              {username ? (
+                <div className="flex items-center gap-4">
+                  <span className="text-white">Welcome, {username}!</span>
+                  <button
+                    onClick={handleLogout}
+                    className="bg-white text-earthyBrown px-4 py-2 rounded-lg hover:bg-gray-200"
+                  >
+                    Logout
+                  </button>
+                </div>
+              ) : (
+                <button
+                  onClick={() => navigate('/login')}
+                  className="bg-white text-earthyBrown px-4 py-2 rounded-lg hover:bg-gray-200"
+                >
+                  Login
+                </button>
+              )}
             </li>
           </ul>
         </nav>

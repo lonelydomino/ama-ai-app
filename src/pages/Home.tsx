@@ -1,59 +1,52 @@
-import React from 'react';
-import Header from '../components/Header'; // Updated import path
+import { Link } from 'react-router-dom';
+import Header from '../components/Header';
 
-const HomePage: React.FC = () => {
+export default function Home() {
   return (
-    <div className="min-h-screen bg-gray-100">
-      {/* Header Component */}
+    <div className="min-h-screen bg-gradient-to-br from-red-950 via-red-800 to-rose-900">
       <Header />
+      
+      <div className="container mx-auto px-4 py-16">
+        <div className="text-center space-y-12 animate-fadeIn">
+          <h1 className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-300 to-rose-400 tracking-tight">
+            Indigenous Insights
+          </h1>
+          
+          <p className="text-2xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
+            Bridging ancient wisdom with modern technology to preserve and share indigenous cultures
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-6 justify-center mt-12">
+            <Link 
+              to="/dashboard" 
+              className="transform hover:scale-105 transition-all duration-300 bg-gradient-to-r from-red-600 to-rose-700 text-white px-8 py-4 rounded-lg text-lg font-semibold shadow-lg hover:shadow-red-500/50"
+            >
+              Enter Dashboard
+            </Link>
+            <Link 
+              to="/about" 
+              className="transform hover:scale-105 transition-all duration-300 bg-gradient-to-r from-rose-700 to-red-800 text-white px-8 py-4 rounded-lg text-lg font-semibold shadow-lg hover:shadow-rose-500/50"
+            >
+              Learn More
+            </Link>
+          </div>
 
-      {/* Main Content with added margin-top */}
-      <div className="flex items-center justify-center p-8 mt-12">
-        {/* Larger Circular Container */}
-        <div className="relative w-[80vw] h-[80vw] max-w-[600px] max-h-[600px] rounded-full border-2 border-gray-300">
-          {/* Center: Generate Report Button (Even Bigger) */}
-          <button
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
-                       bg-blue-500 text-white py-6 px-12 rounded-full text-2xl hover:bg-blue-600"
-          >
-            Generate Report
-          </button>
-
-          {/* Top: Upload Documents Button */}
-          <button
-            className="absolute top-0 left-1/2 transform -translate-x-1/2 
-                       bg-green-500 text-white py-2 px-4 rounded-full hover:bg-green-600"
-          >
-            Upload Documents
-          </button>
-
-          {/* Right: Upload Media Button with extra spacing */}
-          <button
-            className="absolute top-1/2 right-0 transform translate-x-[20px] -translate-y-1/2 
-                       bg-purple-500 text-white py-2 px-4 rounded-full hover:bg-purple-600"
-          >
-            Upload Media
-          </button>
-
-          {/* Left: Upload Audio Button with extra spacing */}
-          <button
-            className="absolute top-1/2 left-0 transform -translate-x-[20px] -translate-y-1/2 
-                       bg-red-500 text-white py-2 px-4 rounded-full hover:bg-red-600"
-          >
-            Upload Audio
-          </button>
-
-          {/* Bottom: Type Context Box with increased width */}
-          <textarea
-            placeholder="Type context..."
-            className="absolute bottom-0 left-1/2 transform -translate-x-1/2 
-                       bg-white border border-gray-300 rounded-lg p-2 resize-none
-                       w-64 h-16"
-          ></textarea>
+          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="backdrop-blur-lg bg-white/5 p-6 rounded-xl hover:bg-white/10 transition-all duration-300">
+              <h3 className="text-xl font-bold text-white mb-2">Discover</h3>
+              <p className="text-gray-300">Explore rich cultural heritage and traditions</p>
+            </div>
+            <div className="backdrop-blur-lg bg-white/5 p-6 rounded-xl hover:bg-white/10 transition-all duration-300">
+              <h3 className="text-xl font-bold text-white mb-2">Connect</h3>
+              <p className="text-gray-300">Bridge the gap between past and present</p>
+            </div>
+            <div className="backdrop-blur-lg bg-white/5 p-6 rounded-xl hover:bg-white/10 transition-all duration-300">
+              <h3 className="text-xl font-bold text-white mb-2">Learn</h3>
+              <p className="text-gray-300">Immerse yourself in indigenous knowledge</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   );
-};
-
-export default HomePage;
+} 

@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import Editor from './pages/Editor';
 
 // Protected Route component
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -36,6 +37,14 @@ function App() {
           />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route 
+            path="/editor" 
+            element={
+              <ProtectedRoute>
+                <Editor />
+              </ProtectedRoute>
+            } 
+          />
         </Routes>
       </div>
     </Router>

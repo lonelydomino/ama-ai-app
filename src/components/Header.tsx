@@ -4,12 +4,14 @@ import { useEffect, useState } from "react";
 const Header = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState<string | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const user = localStorage.getItem('user');
     if (user) {
       const userData = JSON.parse(user);
       setUsername(userData.username);
+      setIsLoggedIn(true);
     }
   }, []);
 
@@ -17,6 +19,7 @@ const Header = () => {
     localStorage.removeItem('apiToken');
     localStorage.removeItem('user');
     setUsername(null);
+    setIsLoggedIn(false);
     navigate('/login');
   };
 
@@ -31,11 +34,20 @@ const Header = () => {
         {/* Navigation */}
         <nav>
           <ul className="flex space-x-6">
-            <li>
-              <Link to="/dashboard" className="text-white text-lg hover:underline">
-                Dashboard
-              </Link>
-            </li>
+            {isLoggedIn && (
+              <>
+                <li>
+                  <Link to="/dashboard" className="text-white text-lg hover:underline">
+                    Dashboard
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/editor" className="text-white text-lg hover:underline">
+                    Editor
+                  </Link>
+                </li>
+              </>
+            )}
             <li>
               <Link to="/about" className="text-white text-lg hover:underline">
                 About

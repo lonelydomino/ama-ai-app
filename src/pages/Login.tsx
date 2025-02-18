@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
 interface LoginResponse {
-  token: string;
+  access_token: string;
   user: {
     id: number;
     username: string;
@@ -34,12 +34,12 @@ export default function Login() {
       const data: LoginResponse = await response.json();
       
       // Store auth token
-      localStorage.setItem('apiToken', data.token);
+      localStorage.setItem('accessToken', data.access_token);
       // Store user data
       localStorage.setItem('user', JSON.stringify(data.user));
       
       // Add token to all future requests
-      setupAuthHeader(data.token);
+      setupAuthHeader(data.access_token);
       
       console.log(`🎉 Successfully logged in as ${data.user.username}`);
       
@@ -116,8 +116,6 @@ export default function Login() {
 // Helper function to set up authentication header
 function setupAuthHeader(token: string) {
   if (token) {
-    // You might want to use axios or another HTTP client that can do this globally
-    // This is just an example of the concept
-    window.localStorage.setItem('apiToken', token);
+    window.localStorage.setItem('accessToken', token);
   }
 }

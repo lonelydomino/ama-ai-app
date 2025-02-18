@@ -18,16 +18,12 @@ interface UploadedFile {
   url?: string;
 }
 
-interface CreateProjectPayload {
-  title: string;
-  description: string;
-  files: UploadedFile[];
-}
 
 interface CreateProjectResponse {
   id: string;
   title: string;
   description: string;
+  ownerId: number;
   created_at: string;
 }
 
@@ -44,33 +40,28 @@ const CreateProject: React.FC = () => {
       setIsCreating(true);
       setError(null);
 
-      const token = localStorage.getItem('apiToken');
-      if (!token) {
-        throw new Error('No authentication token found');
+      const token = localStorage.getItem('accessToken');
+      const userStr = localStorage.getItem('user');
+      
+      if (!token || !userStr) {
+        throw new Error('No authentication token or user found');
       }
 
-      // Create FormData to handle file uploads
-      const formData = new FormData();
-      formData.append('title', title);
-      formData.append('description', description);
-      
-      // Append each file to the FormData
-      uploadedFiles.forEach(file => {
-        // We need to fetch the actual File object from the URL
-        fetch(file.url!)
-          .then(res => res.blob())
-          .then(blob => {
-            const fileObject = new File([blob], file.name, { type: file.type });
-            formData.append('files', fileObject);
-          });
-      });
+      const user = JSON.parse(userStr);
 
-      const response = await fetch('http://localhost:8000/api/projects', {
+      const payload = {
+        title,
+        description,
+        ownerId: user.id
+      };
+
+      const response = await fetch('http://localhost:8000/projects', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
         },
-        body: formData,
+        body: JSON.stringify(payload)
       });
 
       if (!response.ok) {
@@ -87,8 +78,8 @@ const CreateProject: React.FC = () => {
         }
       });
 
-      // Navigate to the editor with the new project ID
-      navigate(`/editor?id=${data.id}`);
+      // Navigate back to projects page instead of editor
+      navigate('/projects');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {

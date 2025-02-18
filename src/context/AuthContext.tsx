@@ -23,7 +23,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     // Check for existing auth on app load
-    const token = localStorage.getItem('apiToken');
+    const token = localStorage.getItem('accessToken');
     const savedUser = localStorage.getItem('user');
     
     if (token && savedUser) {
@@ -33,7 +33,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const login = (token: string, user: User) => {
-    localStorage.setItem('apiToken', token);
+    localStorage.setItem('accessToken', token);
     localStorage.setItem('user', JSON.stringify(user));
     setUser(user);
     setIsAuthenticated(true);
@@ -41,7 +41,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const logout = () => {
-    localStorage.removeItem('apiToken');
+    localStorage.removeItem('accessToken');
     localStorage.removeItem('user');
     setUser(null);
     setIsAuthenticated(false);

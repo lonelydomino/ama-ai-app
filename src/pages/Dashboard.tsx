@@ -72,7 +72,7 @@ const Dashboard: React.FC = () => {
       formData.append('context', context);
       formData.append('type', type);
 
-      const token = localStorage.getItem('apiToken');
+      const token = localStorage.getItem('accessToken');
       const response = await fetch('http://localhost:8000/upload', {
         method: 'POST',
         headers: {

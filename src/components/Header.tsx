@@ -16,7 +16,7 @@ const Header: React.FC = () => {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('apiToken');
+    localStorage.removeItem('accessToken');
     localStorage.removeItem('user');
     setUsername(null);
     setIsLoggedIn(false);

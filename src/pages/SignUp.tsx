@@ -31,7 +31,8 @@ export default function SignUp() {
       }
 
       const data = await response.json();
-      localStorage.setItem('apiToken', data.token);
+      console.log(data);
+      localStorage.setItem('accessToken', data.access_token);
       navigate('/dashboard');
     } catch (err: unknown) {
       if (err instanceof Error) {

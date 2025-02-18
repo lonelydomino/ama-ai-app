@@ -10,7 +10,7 @@ import CreateProject from './pages/CreateProject';
 
 // Protected Route component
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  const token = localStorage.getItem('apiToken');
+  const token = localStorage.getItem('accessToken');
   const user = localStorage.getItem('user');
   
   if (!token || !user) {

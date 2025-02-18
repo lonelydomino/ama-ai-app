@@ -18,15 +18,6 @@ interface UploadedFile {
   url?: string;
 }
 
-
-interface CreateProjectResponse {
-  id: string;
-  title: string;
-  description: string;
-  ownerId: number;
-  created_at: string;
-}
-
 const CreateProject: React.FC = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
@@ -69,7 +60,7 @@ const CreateProject: React.FC = () => {
         throw new Error(errorData.message || 'Failed to create project');
       }
 
-      const data: CreateProjectResponse = await response.json();
+      await response.json();  // Just check the response, don't store it
       
       // Clean up object URLs
       uploadedFiles.forEach(file => {
@@ -79,7 +70,7 @@ const CreateProject: React.FC = () => {
       });
 
       // Navigate back to projects page instead of editor
-      navigate('/projects');
+      navigate('/dashboard');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {

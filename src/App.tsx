@@ -6,6 +6,7 @@ import SignUp from './pages/SignUp';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Editor from './pages/Editor';
+import CreateProject from './pages/CreateProject';
 
 // Protected Route component
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -42,6 +43,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Editor />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/create-project" 
+            element={
+              <ProtectedRoute>
+                <CreateProject />
               </ProtectedRoute>
             } 
           />

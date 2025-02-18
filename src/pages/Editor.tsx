@@ -9,8 +9,10 @@ import {
   faAlignRight,
   faListUl,
   faListOl,
+  faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 import Header from '../components/Header';
+import { useNavigate } from 'react-router-dom';
 
 interface EditorState {
   id: string;
@@ -61,6 +63,7 @@ const Editor: React.FC = () => {
   const editorRef = useRef<HTMLDivElement>(null);
   const [isTyping, setIsTyping] = useState(false);
   const lastContent = useRef(editorState.content);
+  const navigate = useNavigate();
 
   // Set up WebSocket connection
   useEffect(() => {
@@ -399,11 +402,33 @@ const Editor: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const createNewProject = () => {
+    setEditorState({
+      id: crypto.randomUUID(),
+      title: 'Untitled Project',
+      content: '',
+      lastModified: new Date()
+    });
+    navigate(`/editor?id=${editorState.id}`);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-950 via-red-800 to-rose-900">
       <Header />
       
       <div className="container mx-auto px-4 py-8">
+        {/* Add Create Project Button */}
+        <div className="max-w-4xl mx-auto mb-4">
+          <button
+            onClick={createNewProject}
+            className="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg 
+                     transition-all duration-300 flex items-center gap-2"
+          >
+            <FontAwesomeIcon icon={faPlus} />
+            Create New Project
+          </button>
+        </div>
+
         <div className="max-w-4xl mx-auto backdrop-blur-lg bg-white/10 p-6 rounded-xl">
           {/* Title */}
           <input

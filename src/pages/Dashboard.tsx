@@ -14,7 +14,7 @@ import Header from '../components/Header';
 interface Project {
   id: string;
   title: string;
-  lastModified: Date;
+  updated_at: Date;
 }
 
 const Dashboard: React.FC = () => {
@@ -95,7 +95,7 @@ const Dashboard: React.FC = () => {
               <div>
                 <h3 className="text-white text-lg font-semibold">Active Projects</h3>
                 <p className="text-2xl text-white font-bold">
-                  {projects.filter(p => new Date(p.lastModified).getTime() > Date.now() - 7 * 24 * 60 * 60 * 1000).length}
+                  {projects.filter(p => new Date(p.updated_at).getTime() > Date.now() - 7 * 24 * 60 * 60 * 1000).length}
                 </p>
               </div>
             </div>
@@ -141,14 +141,14 @@ const Dashboard: React.FC = () => {
                     <div>
                       <h3 className="text-xl text-white font-semibold">{project.title}</h3>
                       <p className="text-gray-300 text-sm">
-                        Last modified: {new Date(project.lastModified).toLocaleString()}
+                        Last modified: {new Date(project.updated_at).toLocaleString()}
                       </p>
                     </div>
                     <div className="flex gap-2">
                       <Link
-                        to={`/editor?id=${project.id}`}
+                        to={`/projects/${project.id}`}
                         className="p-2 text-white hover:bg-white/20 rounded transition-colors"
-                        title="Edit Project"
+                        title="View Project"
                       >
                         <FontAwesomeIcon icon={faEdit} />
                       </Link>

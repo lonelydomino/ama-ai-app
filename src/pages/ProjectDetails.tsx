@@ -302,7 +302,7 @@ const ProjectDetails: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-br from-red-950 via-red-800 to-rose-900">
       <Header />
       
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 relative">
         <button
           onClick={() => navigate(-1)}
           className="text-white mb-6 flex items-center gap-2 hover:bg-white/10 px-4 py-2 rounded-lg transition-colors"
@@ -374,11 +374,7 @@ const ProjectDetails: React.FC = () => {
                 ) : (
                   <>
                     <button
-                      onClick={() => {
-                        setEditTitle(project.title);
-                        setEditDescription(project.description);
-                        setIsEditing(true);
-                      }}
+                      onClick={() => navigate(`/projects/${project.id}/edit`)}
                       className="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg 
                                transition-all duration-300 flex items-center gap-2"
                     >
@@ -410,7 +406,12 @@ const ProjectDetails: React.FC = () => {
             {/* Files Section */}
             <div className="bg-white/10 backdrop-blur-lg rounded-lg p-6 mb-8">
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-xl font-semibold text-white">Files</h2>
+                <div>
+                  <h2 className="text-xl font-semibold text-white">Files</h2>
+                  <p className="text-gray-400 text-sm mt-1">
+                    Supported formats: PDF, DOC, JPG, PNG, MP3, WAV, MP4.
+                  </p>
+                </div>
                 <label className="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg 
                                transition-all duration-300 flex items-center gap-2 cursor-pointer">
                   <FontAwesomeIcon icon={faPlus} />
@@ -418,6 +419,7 @@ const ProjectDetails: React.FC = () => {
                   <input
                     type="file"
                     multiple
+                    accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.mp3,.wav,.mp4,.mov"
                     onChange={handleFileUpload}
                     className="hidden"
                   />
@@ -633,8 +635,6 @@ const ProjectDetails: React.FC = () => {
                 )}
               </div>
             </div>
-
-            {/* Add more sections here for files, comments, etc. */}
           </div>
         ) : (
           <div className="max-w-4xl mx-auto p-8 bg-white/10 backdrop-blur-lg rounded-lg text-center">

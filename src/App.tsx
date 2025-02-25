@@ -5,7 +5,6 @@ import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import About from './pages/About';
 import Contact from './pages/Contact';
-import Editor from './pages/Editor';
 import CreateProject from './pages/CreateProject';
 import ProjectDetails from './pages/ProjectDetails';
 
@@ -40,14 +39,6 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route 
-            path="/editor" 
-            element={
-              <ProtectedRoute>
-                <Editor />
-              </ProtectedRoute>
-            } 
-          />
-          <Route 
             path="/create-project" 
             element={
               <ProtectedRoute>
@@ -63,6 +54,7 @@ function App() {
               </ProtectedRoute>
             } 
           />
+
         </Routes>
       </div>
     </Router>

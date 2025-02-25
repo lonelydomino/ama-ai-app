@@ -41,11 +41,6 @@ const Header: React.FC = () => {
                     Dashboard
                   </Link>
                 </li>
-                <li>
-                  <Link to="/editor" className="text-white text-lg hover:underline">
-                    Editor
-                  </Link>
-                </li>
               </>
             )}
             <li>

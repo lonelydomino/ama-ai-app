@@ -21,7 +21,7 @@ export default function Home() {
               to="/dashboard" 
               className="transform hover:scale-105 transition-all duration-300 bg-gradient-to-r from-red-600 to-rose-700 text-white px-8 py-4 rounded-lg text-lg font-semibold shadow-lg hover:shadow-red-500/50"
             >
-              Enter Dashboard
+              Generate Report
             </Link>
             <Link 
               to="/about" 
@@ -32,18 +32,7 @@ export default function Home() {
           </div>
 
           <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="backdrop-blur-lg bg-white/5 p-6 rounded-xl hover:bg-white/10 transition-all duration-300">
-              <h3 className="text-xl font-bold text-white mb-2">Discover</h3>
-              <p className="text-gray-300">Explore rich cultural heritage and traditions</p>
-            </div>
-            <div className="backdrop-blur-lg bg-white/5 p-6 rounded-xl hover:bg-white/10 transition-all duration-300">
-              <h3 className="text-xl font-bold text-white mb-2">Connect</h3>
-              <p className="text-gray-300">Bridge the gap between past and present</p>
-            </div>
-            <div className="backdrop-blur-lg bg-white/5 p-6 rounded-xl hover:bg-white/10 transition-all duration-300">
-              <h3 className="text-xl font-bold text-white mb-2">Learn</h3>
-              <p className="text-gray-300">Immerse yourself in indigenous knowledge</p>
-            </div>
+            
           </div>
         </div>
       </div>
